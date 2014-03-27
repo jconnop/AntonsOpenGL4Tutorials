@@ -1,6 +1,7 @@
 /**
 Renderer is a class that wraps all the OpenGL functionality
 */
+#pragma once
 
 #include "main.h"
 #include <map>

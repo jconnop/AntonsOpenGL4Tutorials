@@ -1,6 +1,7 @@
 /**
 High level game logic. Main loop, etc.
 */
+#pragma once
 
 #include "main.h"
 
@@ -12,6 +13,6 @@ public:
 	bool Initialise();
 	void MainLoop();
 private:
-	Renderer renderer;
+	Renderer mRenderer;
 protected:
 };

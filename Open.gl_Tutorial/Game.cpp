@@ -1,8 +1,8 @@
-#include "main.h"
+#include "Game.h"
 
 Game::Game()
 {
-	this->renderer.InitWindow(4, 0, false, 1024, 768, std::string("OpenGL Stuff"));
+	this->mRenderer.InitWindow(4, 0, false, 1024, 768, std::string("OpenGL Stuff"));
 }
 
 Game::~Game()
@@ -12,7 +12,7 @@ Game::~Game()
 
 bool Game::Initialise()
 {
-	if (this->renderer.LoadShaders() && this->renderer.LoadScene())
+	if (this->mRenderer.LoadShaders() && this->mRenderer.LoadScene())
 	{
 		return true;
 	}
@@ -24,11 +24,11 @@ bool Game::Initialise()
 
 void Game::MainLoop()
 {
-	GLFWwindow *window = this->renderer.getWindow();
+	GLFWwindow *window = this->mRenderer.getWindow();
 
 	while (!glfwWindowShouldClose(window))
 	{
-		this->renderer.RenderScene();
+		this->mRenderer.RenderScene();
 
 		glfwSwapBuffers(window);
 

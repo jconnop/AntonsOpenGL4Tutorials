@@ -13,5 +13,6 @@
 // Project headers
 #include "Renderer.h"
 #include "Game.h"
+#include "Shader.h"
 
 int main();
