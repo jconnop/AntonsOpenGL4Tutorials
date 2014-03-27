@@ -70,6 +70,12 @@ namespace Fal
 
 	bool Renderer::LoadShaders()
 	{
+		this->vertex_shaders["basic"] =
+			new Shader("Shaders/Vertex/basic_vs.glsl", GL_VERTEX_SHADER);
+
+		this->fragment_shaders["basic"] =
+			new Shader("Shaders/Fragment/basic_fs.glsl", GL_FRAGMENT_SHADER);
+
 
 		return true;
 	}
