@@ -42,6 +42,10 @@ namespace Fal
 		glewExperimental = GL_TRUE;
 		glewInit();
 
+		// Set high level GL options
+		glEnable(GL_DEPTH_TEST); // enable depth-testing
+		glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
+
 		this->window = window;
 		return window;
 	}

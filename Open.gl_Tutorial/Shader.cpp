@@ -31,6 +31,11 @@ namespace Fal
 		}
 	}
 
+	inline GLuint Shader::getHandle()
+	{
+		return mHandle;
+	}
+
 	bool Shader::LoadFromFile()
 	{
 		// File input stream

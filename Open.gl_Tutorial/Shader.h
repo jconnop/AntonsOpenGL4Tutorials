@@ -17,10 +17,12 @@ namespace Fal
 		Shader(const std::string& source, const GLenum type, const bool direct);
 
 		~Shader();
+
+		inline GLuint getHandle();
 	private:
 		GLuint mHandle;
-		GLenum mType;
-		std::string mRelativePath;
+		const GLenum mType;
+		const std::string mRelativePath;
 		std::string mSource;
 
 		bool LoadFromFile();
