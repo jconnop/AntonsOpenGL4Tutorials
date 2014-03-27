@@ -31,7 +31,7 @@ namespace Fal
 		}
 	}
 
-	inline GLuint Shader::getHandle()
+	GLuint Shader::getHandle()
 	{
 		return mHandle;
 	}

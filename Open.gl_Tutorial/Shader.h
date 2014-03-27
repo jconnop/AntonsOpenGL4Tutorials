@@ -18,7 +18,7 @@ namespace Fal
 
 		~Shader();
 
-		inline GLuint getHandle();
+		GLuint getHandle();
 	private:
 		GLuint mHandle;
 		const GLenum mType;
