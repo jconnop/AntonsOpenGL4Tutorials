@@ -82,6 +82,45 @@ namespace Fal
 
 	bool Renderer::LoadScene()
 	{
+		// Triangle vertex position data
+		float points[] = {
+			0.0f, 0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			-0.5f, -0.5f, 0.0f
+		};
+
+
+		// Create VBO for triangle vertex positions
+		GLuint vbo = GL_FALSE;
+		glGenBuffers(1, &vbo);
+		this->vbos["trianglePosition"] = vbo;
+
+		// Bind triangle position VBO
+		glBindBuffer(GL_ARRAY_BUFFER, this->vbos["trianglePosition"]);
+
+		// Shunt triangle position data to gpu memory
+		glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+
+
+		// Create VAO for triangle mesh
+		GLuint vao = GL_FALSE;
+		glGenVertexArrays(1, &vao);
+		this->vaos["triangle"] = vao;
+
+		// Bind triangle mesh VAO
+		glBindVertexArray(this->vaos["triangle"]);
+
+		// Enable vertex shader attribute #0
+		glEnableVertexAttribArray(0);
+
+		// Bind triangle position VBO
+		glBindBuffer(GL_ARRAY_BUFFER, this->vbos["trianglePosition"]);
+
+		// Define layout of vertex shader attribute #0
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+
+
 
 		return true;
 	}
