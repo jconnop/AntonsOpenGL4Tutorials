@@ -121,17 +121,26 @@ namespace Fal
 
 
 		// Create shader program: basic
-		GLuint shader_programme = glCreateProgram();
-		glAttachShader(shader_programme, this->fragment_shaders["basic"]->getHandle());
-		glAttachShader(shader_programme, this->vertex_shaders["basic"]->getHandle());
-		glLinkProgram(shader_programme);
-		this->shader_programs["basic"] = shader_programme;
+		GLuint shader_program = glCreateProgram();
+		glAttachShader(shader_program, this->fragment_shaders["basic"]->getHandle());
+		glAttachShader(shader_program, this->vertex_shaders["basic"]->getHandle());
+		glLinkProgram(shader_program);
+		this->shader_programs["basic"] = shader_program;
 
 		return true;
 	}
 
 	bool Renderer::RenderScene()
 	{
+		// wipe the drawing surface clear
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glUseProgram(this->shader_programs["basic"]);
+		glBindVertexArray(this->vaos["triangle"]);
+
+		// draw points 0-3 from the currently bound VAO with current in-use shader
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 		return true;
 	}
 
