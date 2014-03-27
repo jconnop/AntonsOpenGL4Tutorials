@@ -9,6 +9,19 @@ namespace Fal
 
 	Renderer::~Renderer()
 	{
+		for (auto shader : this->vertex_shaders)
+		{
+			delete shader.second;
+		}
+
+		for (auto shader : this->fragment_shaders)
+		{
+			delete shader.second;
+		}
+
+		this->vertex_shaders.clear();
+		this->fragment_shaders.clear();
+
 		this->window = 0;
 		glfwTerminate();
 	}

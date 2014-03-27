@@ -25,8 +25,8 @@ namespace Fal
 		GLFWwindow *window;
 		std::map <std::string, GLuint> vaos;
 		std::map <std::string, GLuint> vbos;
-		std::map <std::string, Fal::Shader> vertex_shaders;
-		std::map <std::string, Fal::Shader> fragment_shaders;
+		std::map <std::string, Fal::Shader *> vertex_shaders;
+		std::map <std::string, Fal::Shader *> fragment_shaders;
 	};
 
 }
