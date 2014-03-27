@@ -120,7 +120,12 @@ namespace Fal
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
-
+		// Create shader program: basic
+		GLuint shader_programme = glCreateProgram();
+		glAttachShader(shader_programme, this->fragment_shaders["basic"]->getHandle());
+		glAttachShader(shader_programme, this->vertex_shaders["basic"]->getHandle());
+		glLinkProgram(shader_programme);
+		this->shader_programs["basic"] = shader_programme;
 
 		return true;
 	}
