@@ -1,54 +1,58 @@
 #include "Shader.h"
-#include <fstream>
 
-Shader::Shader(const std::string& relativePath, const GLenum type) : 
-	mRelativePath(relativePath),
-	mType(type),
-	mSource(""),
-	mHandle(GL_FALSE)
+namespace Fal
 {
-	this->LoadFromFile();
 
-	this->Compile();
-}
-
-Shader::Shader(const std::string& source,const GLenum type, const bool direct) : 
-	mRelativePath(""),
-	mType(type),
-	mSource(source),
-	mHandle(GL_FALSE)
-{
-	this->Compile();
-}
-
-Shader::~Shader()
-{
-	if (mHandle != GL_FALSE)
+	Shader::Shader(const std::string& relativePath, const GLenum type) :
+		mRelativePath(relativePath),
+		mType(type),
+		mSource(""),
+		mHandle(GL_FALSE)
 	{
-		glDeleteShader(mHandle);
+		this->LoadFromFile();
+
+		this->Compile();
 	}
-}
 
-bool Shader::LoadFromFile()
-{
-	// File input stream
-	std::ifstream file(mRelativePath);
+	Shader::Shader(const std::string& source, const GLenum type, const bool direct) :
+		mRelativePath(""),
+		mType(type),
+		mSource(source),
+		mHandle(GL_FALSE)
+	{
+		this->Compile();
+	}
 
-	// Use string constructor to read file into string
-	std::string fileAsString((std::istreambuf_iterator<char>(file)),
-		std::istreambuf_iterator<char>());
+	Shader::~Shader()
+	{
+		if (mHandle != GL_FALSE)
+		{
+			glDeleteShader(mHandle);
+		}
+	}
 
-	this->mSource = fileAsString;
+	bool Shader::LoadFromFile()
+	{
+		// File input stream
+		std::ifstream file(mRelativePath);
 
-	return true;
-}
+		// Use string constructor to read file into string
+		std::string fileAsString((std::istreambuf_iterator<char>(file)),
+			std::istreambuf_iterator<char>());
 
-bool Shader::Compile()
-{
-	mHandle = glCreateShader(mType);
-	const char * source = mSource.c_str();
-	glShaderSource(mHandle, 1, &source, NULL);
-	glCompileShader(mHandle);
+		this->mSource = fileAsString;
 
-	return true;
+		return true;
+	}
+
+	bool Shader::Compile()
+	{
+		mHandle = glCreateShader(mType);
+		const char * source = mSource.c_str();
+		glShaderSource(mHandle, 1, &source, NULL);
+		glCompileShader(mHandle);
+
+		return true;
+	}
+
 }

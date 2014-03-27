@@ -1,8 +1,9 @@
 #include "main.h"
+#include "Game.h"
 
 int main()
 {
-	Game game;
+	Fal::Game game;
 	if (game.Initialise())
 	{
 		game.MainLoop();

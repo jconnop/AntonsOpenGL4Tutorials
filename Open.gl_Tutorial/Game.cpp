@@ -1,44 +1,49 @@
 #include "Game.h"
 
-Game::Game()
-{
-	this->mRenderer.InitWindow(4, 0, false, 1024, 768, std::string("OpenGL Stuff"));
-}
-
-Game::~Game()
+namespace Fal
 {
 
-}
-
-bool Game::Initialise()
-{
-	if (this->mRenderer.LoadShaders() && this->mRenderer.LoadScene())
+	Game::Game()
 	{
-		return true;
+		this->mRenderer.InitWindow(4, 0, false, 1024, 768, std::string("OpenGL Stuff"));
 	}
-	else
+
+	Game::~Game()
 	{
-		return false;
+
 	}
-}
 
-void Game::MainLoop()
-{
-	GLFWwindow *window = this->mRenderer.getWindow();
-
-	while (!glfwWindowShouldClose(window))
+	bool Game::Initialise()
 	{
-		this->mRenderer.RenderScene();
-
-		glfwSwapBuffers(window);
-
-		glfwPollEvents();
-
-		//Messy, move me
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		if (this->mRenderer.LoadShaders() && this->mRenderer.LoadScene())
 		{
-			glfwSetWindowShouldClose(window, GL_TRUE);
+			return true;
 		}
+		else
+		{
+			return false;
+		}
+	}
+
+	void Game::MainLoop()
+	{
+		GLFWwindow *window = this->mRenderer.getWindow();
+
+		while (!glfwWindowShouldClose(window))
+		{
+			this->mRenderer.RenderScene();
+
+			glfwSwapBuffers(window);
+
+			glfwPollEvents();
+
+			//Messy, move me
+			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			{
+				glfwSetWindowShouldClose(window, GL_TRUE);
+			}
+		}
+
 	}
 
 }
