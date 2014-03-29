@@ -14,10 +14,13 @@ namespace Fal
 	public:
 		Game();
 		~Game();
+
 		bool Initialise();
 		void MainLoop();
+
+		Renderer& getRenderer();
 	private:
-		Fal::Renderer mRenderer;
+		Renderer mRenderer;
 	protected:
 	};
 
