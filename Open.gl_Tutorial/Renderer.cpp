@@ -51,14 +51,29 @@ namespace Fal
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 		glfwWindowHint(GLFW_SAMPLES, 8);
 
+
 		// Create Window object
 		GLFWwindow* window = NULL;
+		GLFWmonitor *mon = glfwGetPrimaryMonitor();
+		const GLFWvidmode *vmode = glfwGetVideoMode(mon);
 		if (fullscreen)
 		{
-			window = glfwCreateWindow(x, y, title.c_str(), glfwGetPrimaryMonitor(), nullptr); // Fullscreen
+			// Make sure to have valid window size
+			if (x == 0 || y == 0)
+			{
+				x = vmode->width;
+				y = vmode->height;
+			}
+			window = glfwCreateWindow(x, y, title.c_str(), mon, nullptr); // Fullscreen
 		}
 		else
 		{
+			// Make sure to have valid window size
+			if (x == 0 || y == 0)
+			{
+				x = vmode->width / 2;
+				y = vmode->height / 2;
+			}
 			window = glfwCreateWindow(x, y, title.c_str(), nullptr, nullptr); // Windowed
 		}
 
