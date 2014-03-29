@@ -9,4 +9,7 @@
 // Other library headers
 #include <GLFW/glfw3.h>
 
+// Project wide defines
+#define GL_LOG_FILE "gl.log"
+
 int main();
