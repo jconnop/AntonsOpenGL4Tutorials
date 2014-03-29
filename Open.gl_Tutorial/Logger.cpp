@@ -1,25 +1,44 @@
 #include "Logger.h"
 
-bool Logger::truncateLog(std::string file)
+namespace Fal
 {
-	auto fileHandle = std::ofstream(file, std::ios::out | std::ios::trunc);
 
-	time_t now = time(NULL);
+	bool Logger::truncateLog(std::string file)
+	{
+		auto fileHandle = std::ofstream(file, std::ios::out | std::ios::trunc);
+		if (!fileHandle.good())
+		{
+			fileHandle.close();
+			return false;
+		}
 
-	fileHandle << "Started logging at " << ctime(&now) << std::endl << std::endl;
+		time_t now = time(NULL);
 
-	fileHandle.close();
-}
+		fileHandle << "Started logging at " << ctime(&now) << std::endl << std::endl;
 
-bool Logger::log(std::string file, std::string message, const char *filename, int line)
-{
-	auto fileHandle = std::ofstream(file, std::ios::out | std::ios::app);
+		fileHandle.close();
 
-	time_t now = time(NULL);
+		return true;
+	}
 
-	fileHandle << ctime(&now) << "\t" 
-		<< filename << ":" << line << "\t"
-		<< message << std::endl;
+	bool Logger::log(std::string file, std::string message, const char *filename, int line)
+	{
+		auto fileHandle = std::ofstream(file, std::ios::out | std::ios::app);
+		if (!fileHandle.good())
+		{
+			fileHandle.close();
+			return false;
+		}
 
-	fileHandle.close();
+		time_t now = time(NULL);
+
+		fileHandle << ctime(&now) << "\t"
+			<< filename << ":" << line << "\t"
+			<< message << std::endl;
+
+		fileHandle.close();
+
+		return true;
+	}
+
 }
