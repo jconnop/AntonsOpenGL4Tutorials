@@ -3,6 +3,7 @@
 
 namespace Fal
 {
+	// Initialise static member
 	double FPSCounter::mDISPLAY_INTERVAL = 0.25;
 
 	FPSCounter::FPSCounter() : 
@@ -33,5 +34,10 @@ namespace Fal
 			mFrameCount = 0;
 		}
 		mFrameCount++;
+	}
+
+	void FPSCounter::setWindow(GLFWwindow *window)
+	{
+		mWindow = window;
 	}
 }
