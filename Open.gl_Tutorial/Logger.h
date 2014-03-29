@@ -9,11 +9,16 @@
 #include <string>
 #include <fstream>
 
-class Logger
+namespace Fal
 {
-public:
-	static bool truncateLog(std::string file);
-	static bool log(std::string file, std::string message, const char *filename, int line);
-private:
-protected:
-};
+
+	class Logger
+	{
+	public:
+		static bool truncateLog(std::string file);
+		static bool log(std::string file, std::string message, const char *filename, int line);
+	private:
+	protected:
+	};
+
+}
