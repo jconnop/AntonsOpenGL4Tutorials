@@ -11,11 +11,12 @@ namespace Fal
 	class FPSCounter
 	{
 	public:
+		FPSCounter();
 		FPSCounter(GLFWwindow *window);
 
 		void update();
+		void setWindow(GLFWwindow *window);
 	private:
-		FPSCounter(); // Disable default constructor
 		FPSCounter(const FPSCounter&); // Disable copy constructor
 
 		GLFWwindow *mWindow;

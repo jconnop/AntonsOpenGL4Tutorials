@@ -5,11 +5,18 @@ namespace Fal
 {
 	double FPSCounter::mDISPLAY_INTERVAL = 0.25;
 
-	FPSCounter::FPSCounter(GLFWwindow *window) : 
+	FPSCounter::FPSCounter() : 
 		mPreviousSeconds(glfwGetTime()),
 		mFrameCount(0)
 	{
-		this->update();
+
+	}
+
+	FPSCounter::FPSCounter(GLFWwindow *window) : 
+		mPreviousSeconds(glfwGetTime()),
+		mFrameCount(0),
+		mWindow(window)
+	{
 	}
 
 	void FPSCounter::update()
