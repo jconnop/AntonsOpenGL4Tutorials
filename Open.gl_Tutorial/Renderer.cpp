@@ -1,4 +1,6 @@
 #include "Renderer.h"
+#include "Logger.h"
+#include <assert.h>
 
 namespace Fal
 {
@@ -28,8 +30,18 @@ namespace Fal
 
 	GLFWwindow * Renderer::InitWindow(int glMajor, int glMinor, bool fullscreen, int x, int y, std::string title)
 	{
+		// Log GL version
+		assert(Logger::log(GL_LOG_FILE,
+			std::string("Starting GLFW version ").append(glfwGetVersionString()),
+			__FILE__, __LINE__));
+
+		glfwSetErrorCallback(glfw_error_callback);
+
 		// Init GLFW Library
-		glfwInit();
+		if (!glfwInit()) {
+			Logger::log(GL_LOG_FILE, "ERROR: could not start GLFW3", __FILE__, __LINE__);
+			return NULL;
+		}
 
 		// Set up window options
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, glMajor);
@@ -38,7 +50,7 @@ namespace Fal
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 		// Create Window object
-		GLFWwindow* window = 0;
+		GLFWwindow* window = NULL;
 		if (fullscreen)
 		{
 			window = glfwCreateWindow(x, y, title.c_str(), glfwGetPrimaryMonitor(), nullptr); // Fullscreen

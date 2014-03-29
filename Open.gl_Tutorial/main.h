@@ -13,3 +13,4 @@
 #define GL_LOG_FILE "gl.log"
 
 int main();
+void glfw_error_callback(int error, const char* description);
