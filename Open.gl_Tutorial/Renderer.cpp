@@ -92,6 +92,9 @@ namespace Fal
 		glEnable(GL_DEPTH_TEST); // enable depth-testing
 		glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
 
+		// Log GL params
+		this->logGLParams();
+
 		// Set viewport sizes
 		mViewportX = x;
 		mViewportY = y;
@@ -132,6 +135,59 @@ namespace Fal
 	{
 		mViewportX = x;
 		mViewportY = y;
+	}
+
+	void Renderer::logGLParams()
+	{
+		GLenum params[] = {
+			GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,
+			GL_MAX_CUBE_MAP_TEXTURE_SIZE,
+			GL_MAX_DRAW_BUFFERS,
+			GL_MAX_FRAGMENT_UNIFORM_COMPONENTS,
+			GL_MAX_TEXTURE_IMAGE_UNITS,
+			GL_MAX_TEXTURE_SIZE,
+			GL_MAX_VARYING_FLOATS,
+			GL_MAX_VERTEX_ATTRIBS,
+			GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,
+			GL_MAX_VERTEX_UNIFORM_COMPONENTS,
+			GL_MAX_VIEWPORT_DIMS,
+			GL_STEREO,
+		};
+		const char* names[] = {
+			"GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS",
+			"GL_MAX_CUBE_MAP_TEXTURE_SIZE",
+			"GL_MAX_DRAW_BUFFERS",
+			"GL_MAX_FRAGMENT_UNIFORM_COMPONENTS",
+			"GL_MAX_TEXTURE_IMAGE_UNITS",
+			"GL_MAX_TEXTURE_SIZE",
+			"GL_MAX_VARYING_FLOATS",
+			"GL_MAX_VERTEX_ATTRIBS",
+			"GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS",
+			"GL_MAX_VERTEX_UNIFORM_COMPONENTS",
+			"GL_MAX_VIEWPORT_DIMS",
+			"GL_STEREO",
+		};
+		std::cout << "test" << std::endl;
+		Logger::log(GL_LOG_FILE, "GL Context Params:", __FILE__, __LINE__);
+		char msg[256];
+		// integers - only works if the order is 0-10 integer return types
+		for (int i = 0; i < 10; i++) {
+			int v = 0;
+			glGetIntegerv(params[i], &v);
+			sprintf(msg, "%s %i", names[i], v);
+			Logger::log(GL_LOG_FILE, msg, __FILE__, __LINE__);
+		}
+		// others
+		int v[2];
+		v[0] = v[1] = 0;
+		glGetIntegerv(params[10], v);
+		sprintf(msg, "%s %i %i", names[10], v[0], v[1]);
+		Logger::log(GL_LOG_FILE, msg, __FILE__, __LINE__);
+		unsigned char s = 0;
+		glGetBooleanv(params[11], &s);
+		sprintf(msg, "%s %i", names[11], (unsigned int)s);
+		Logger::log(GL_LOG_FILE, msg, __FILE__, __LINE__);
+		Logger::log(GL_LOG_FILE, "-----------------------------", __FILE__, __LINE__);
 	}
 
 }
