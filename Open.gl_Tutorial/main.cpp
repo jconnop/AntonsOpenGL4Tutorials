@@ -2,24 +2,22 @@
 #include "Game.h"
 #include "Logger.h"
 
-namespace Fal
+int main()
 {
-	int main()
-	{
-		Fal::Game game;
-		if (game.Initialise())
-		{
-			game.MainLoop();
-		}
+	Fal::Logger::truncateLog(GL_LOG_FILE);
 
-		return 0;
+	Fal::Game game;
+	if (game.Initialise())
+	{
+		game.MainLoop();
 	}
 
-	// C-style function callbacks
-	void glfw_error_callback(int error, const char* description)
-	{
-		fputs(description, stderr);
-		Logger::log(GL_LOG_FILE, description, __FILE__, __LINE__);
-	}
+	return 0;
+}
 
+// C-style function callbacks
+void glfw_error_callback(int error, const char* description)
+{
+	fputs(description, stderr);
+	Fal::Logger::log(GL_LOG_FILE, description, __FILE__, __LINE__);
 }

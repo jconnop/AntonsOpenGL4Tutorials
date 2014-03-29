@@ -6,8 +6,10 @@
 
 #include "main.h"
 #include <ctime>
+#include <chrono>
 #include <string>
 #include <fstream>
+#include <iomanip>
 
 namespace Fal
 {
