@@ -12,5 +12,10 @@
 // Project wide defines
 #define GL_LOG_FILE "gl.log"
 
-int main();
-void glfw_error_callback(int error, const char* description);
+namespace Fal
+{
+
+	int main();
+	void glfw_error_callback(int error, const char* description);
+
+}
