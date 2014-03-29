@@ -46,8 +46,10 @@ namespace Fal
 		// Set up window options
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, glMajor);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, glMinor);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+		glfwWindowHint(GLFW_SAMPLES, 8);
 
 		// Create Window object
 		GLFWwindow* window = NULL;
