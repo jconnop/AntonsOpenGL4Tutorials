@@ -6,15 +6,18 @@ namespace Fal
 	bool Logger::truncateLog(std::string file)
 	{
 		auto fileHandle = std::ofstream(file, std::ios::out | std::ios::trunc);
-		if (!fileHandle.good())
+		if (!fileHandle.is_open() || !fileHandle.good())
 		{
 			fileHandle.close();
 			return false;
 		}
 
-		time_t now = time(NULL);
+		std::time_t now = std::time(NULL);
+		struct std::tm *ptm = std::localtime(&now);
 
-		fileHandle << "Started logging at " << ctime(&now) << std::endl << std::endl;
+		fileHandle << "Started logging at " 
+			<< std::put_time(ptm, "%Y-%m-%d %H:%M:%S") 
+			<< std::endl << std::endl;
 
 		fileHandle.close();
 
@@ -24,15 +27,16 @@ namespace Fal
 	bool Logger::log(std::string file, std::string message, const char *filename, int line)
 	{
 		auto fileHandle = std::ofstream(file, std::ios::out | std::ios::app);
-		if (!fileHandle.good())
+		if (!fileHandle.is_open() || !fileHandle.good())
 		{
 			fileHandle.close();
 			return false;
 		}
 
-		time_t now = time(NULL);
+		std::time_t now = std::time(NULL);
+		struct std::tm *ptm = std::localtime(&now);
 
-		fileHandle << ctime(&now) << "\t"
+		fileHandle << std::put_time(ptm, "%Y-%m-%d %H:%M:%S") << "\t"
 			<< filename << ":" << line << "\t"
 			<< message << std::endl;
 
