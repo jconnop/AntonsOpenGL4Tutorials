@@ -99,6 +99,10 @@ namespace Fal
 		mViewportX = x;
 		mViewportY = y;
 
+		// Start FPS counter
+		mFPS.setWindow(window);
+		mFPS.update();
+
 		this->window = window;
 		return window;
 	}
@@ -122,6 +126,9 @@ namespace Fal
 
 	bool Renderer::RenderScene()
 	{
+		// Update FPS counter
+		mFPS.update();
+
 		// Wipe the drawing surface clear
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

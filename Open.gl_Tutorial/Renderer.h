@@ -6,6 +6,7 @@ Renderer is a class that wraps all the OpenGL functionality
 #include "main.h"
 #include <map>
 #include "Shader.h"
+#include "FPSCounter.h"
 #include "glfwCallbacks.h"
 #include <iostream>
 
@@ -27,6 +28,7 @@ namespace Fal
 		
 		int mViewportX;
 		int mViewportY;
+		FPSCounter mFPS;
 	protected:
 		GLFWwindow *window;
 		std::map <std::string, GLuint> vaos;
