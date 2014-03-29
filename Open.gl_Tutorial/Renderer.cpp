@@ -114,12 +114,62 @@ namespace Fal
 
 	bool Renderer::LoadShaders()
 	{
+		this->vertex_shaders["basic"] =
+			new Shader("Shaders/Vertex/basic_vs.glsl", GL_VERTEX_SHADER);
+
+		this->fragment_shaders["basic"] =
+			new Shader("Shaders/Fragment/basic_fs.glsl", GL_FRAGMENT_SHADER);
+
 
 		return true;
 	}
 
 	bool Renderer::LoadScene()
 	{
+		// Triangle vertex position data
+		float points[] = {
+			0.0f, 0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			-0.5f, -0.5f, 0.0f
+		};
+
+
+		// Create VBO for triangle vertex positions
+		GLuint vbo = GL_FALSE;
+		glGenBuffers(1, &vbo);
+		this->vbos["trianglePosition"] = vbo;
+
+		// Bind triangle position VBO
+		glBindBuffer(GL_ARRAY_BUFFER, this->vbos["trianglePosition"]);
+
+		// Shunt triangle position data to gpu memory
+		glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+
+
+		// Create VAO for triangle mesh
+		GLuint vao = GL_FALSE;
+		glGenVertexArrays(1, &vao);
+		this->vaos["triangle"] = vao;
+
+		// Bind triangle mesh VAO
+		glBindVertexArray(this->vaos["triangle"]);
+
+		// Enable vertex shader attribute #0
+		glEnableVertexAttribArray(0);
+
+		// Bind triangle position VBO
+		glBindBuffer(GL_ARRAY_BUFFER, this->vbos["trianglePosition"]);
+
+		// Define layout of vertex shader attribute #0
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+
+		// Create shader program: basic
+		GLuint shader_program = glCreateProgram();
+		glAttachShader(shader_program, this->fragment_shaders["basic"]->getHandle());
+		glAttachShader(shader_program, this->vertex_shaders["basic"]->getHandle());
+		glLinkProgram(shader_program);
+		this->shader_programs["basic"] = shader_program;
 
 		return true;
 	}
@@ -131,7 +181,13 @@ namespace Fal
 
 		// Wipe the drawing surface clear
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		glUseProgram(this->shader_programs["basic"]);
+		glBindVertexArray(this->vaos["triangle"]);
 
+		// draw points 0-3 from the currently bound VAO with current in-use shader
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		
 		// Update viewport
 		glViewport(0, 0, mViewportX, mViewportY);
 
