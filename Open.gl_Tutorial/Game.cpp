@@ -46,4 +46,9 @@ namespace Fal
 
 	}
 
+	Renderer& Game::getRenderer()
+	{
+		return this->mRenderer;
+	}
+
 }

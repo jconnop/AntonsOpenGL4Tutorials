@@ -35,6 +35,7 @@ namespace Fal
 			std::string("Starting GLFW version ").append(glfwGetVersionString()),
 			__FILE__, __LINE__));
 
+		// Register GLFW error callback
 		glfwSetErrorCallback(glfw_error_callback);
 
 		// Init GLFW Library
@@ -77,6 +78,9 @@ namespace Fal
 			window = glfwCreateWindow(x, y, title.c_str(), nullptr, nullptr); // Windowed
 		}
 
+		// Register GLFW window resize callback
+		glfwSetWindowSizeCallback(window, glfw_window_size_callback);
+
 		// Activate window
 		glfwMakeContextCurrent(window);
 
@@ -87,6 +91,10 @@ namespace Fal
 		// Set high level GL options
 		glEnable(GL_DEPTH_TEST); // enable depth-testing
 		glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
+
+		// Set viewport sizes
+		mViewportX = x;
+		mViewportY = y;
 
 		this->window = window;
 		return window;
@@ -111,7 +119,19 @@ namespace Fal
 
 	bool Renderer::RenderScene()
 	{
+		// Wipe the drawing surface clear
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Update viewport
+		glViewport(0, 0, mViewportX, mViewportY);
+
 		return true;
+	}
+
+	void Renderer::setViewport(int x, int y)
+	{
+		mViewportX = x;
+		mViewportY = y;
 	}
 
 }
