@@ -7,6 +7,7 @@ Renderer is a class that wraps all the OpenGL functionality
 #include <map>
 #include "Shader.h"
 #include "glfwCallbacks.h"
+#include <iostream>
 
 namespace Fal
 {
@@ -22,7 +23,8 @@ namespace Fal
 		bool RenderScene();
 		void setViewport(int x, int y);
 	private:
-		bool loadAndCompileShader(const std::string relativePath, const GLenum type, GLuint *shader);
+		void logGLParams();
+		
 		int mViewportX;
 		int mViewportY;
 	protected:

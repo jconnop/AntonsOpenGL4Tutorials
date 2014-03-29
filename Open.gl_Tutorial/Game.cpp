@@ -5,7 +5,7 @@ namespace Fal
 
 	Game::Game()
 	{
-		this->mRenderer.InitWindow(4, 0, false, 1024, 768, std::string("OpenGL Stuff"));
+		
 	}
 
 	Game::~Game()
@@ -15,6 +15,8 @@ namespace Fal
 
 	bool Game::Initialise()
 	{
+		this->mRenderer.InitWindow(4, 0, false, 1024, 768, std::string("OpenGL Stuff"));
+
 		if (this->mRenderer.LoadShaders() && this->mRenderer.LoadScene())
 		{
 			return true;
