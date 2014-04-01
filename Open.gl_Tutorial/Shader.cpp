@@ -3,19 +3,7 @@
 namespace Fal
 {
 
-	Shader::Shader(const std::string& relativePath, const GLenum type) :
-		mRelativePath(relativePath),
-		mType(type),
-		mSource(""),
-		mHandle(GL_FALSE)
-	{
-		this->LoadFromFile();
-
-		this->Compile();
-	}
-
-	Shader::Shader(const std::string& source, const GLenum type, const bool direct) :
-		mRelativePath(""),
+	Shader::Shader(const std::string& source, const GLenum type) :
 		mType(type),
 		mSource(source),
 		mHandle(GL_FALSE)
@@ -34,20 +22,6 @@ namespace Fal
 	GLuint Shader::getHandle()
 	{
 		return mHandle;
-	}
-
-	bool Shader::LoadFromFile()
-	{
-		// File input stream
-		std::ifstream file(mRelativePath);
-
-		// Use string constructor to read file into string
-		std::string fileAsString((std::istreambuf_iterator<char>(file)),
-			std::istreambuf_iterator<char>());
-
-		this->mSource = fileAsString;
-
-		return true;
 	}
 
 	bool Shader::Compile()

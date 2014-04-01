@@ -13,19 +13,17 @@ namespace Fal
 	class Shader
 	{
 	public:
-		Shader(const std::string& relativePath, const GLenum type);
-		Shader(const std::string& source, const GLenum type, const bool direct);
+		Shader(const std::string& source, const GLenum type);
 
 		~Shader();
 
 		GLuint getHandle();
+		std::string getInfoLog();
 	private:
 		GLuint mHandle;
 		const GLenum mType;
-		const std::string mRelativePath;
 		std::string mSource;
 
-		bool LoadFromFile();
 		bool Compile();
 	protected:
 
