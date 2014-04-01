@@ -19,6 +19,14 @@ namespace Fal
 		}
 	}
 
+	bool Shader::isCompiled()
+	{
+		GLint compiled = GL_FALSE;
+		glGetShaderiv(mHandle, GL_COMPILE_STATUS, &compiled);
+
+		return (compiled == GL_TRUE);
+	}
+
 	GLuint Shader::getHandle()
 	{
 		return mHandle;

@@ -17,6 +17,7 @@ namespace Fal
 
 		~Shader();
 
+		bool isCompiled();
 		GLuint getHandle();
 		std::string getInfoLog();
 	private:
