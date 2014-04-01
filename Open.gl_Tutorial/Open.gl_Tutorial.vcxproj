@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FPSCounter.cpp" />
+    <ClCompile Include="FSUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="glfwCallbacks.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FPSCounter.h" />
+    <ClInclude Include="FSUtils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="glfwCallbacks.h" />
     <ClInclude Include="Logger.h" />
