@@ -25,6 +25,10 @@ namespace Fal
 		std::string mSource;
 
 		bool Compile();
+
+		// Disable some default constructors
+		Shader();
+		Shader(const Shader&);
 	protected:
 
 	};
