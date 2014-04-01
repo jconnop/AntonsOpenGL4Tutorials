@@ -12,6 +12,7 @@
 // GLM header / defines
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#include <glm/gtx/vec1.hpp>
 
 // Project wide defines
 #define GL_LOG_FILE "gl.log"
