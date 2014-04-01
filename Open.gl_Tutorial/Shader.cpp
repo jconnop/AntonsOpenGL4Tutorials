@@ -34,4 +34,28 @@ namespace Fal
 		return true;
 	}
 
+	std::string Shader::getInfoLog()
+	{
+		int logLength = 0;
+
+		// Get length of log
+		glGetShaderiv(mHandle, GL_INFO_LOG_LENGTH, &logLength);
+
+		if (logLength > 0)
+		{
+			int dummy;
+			char *buffer = new char[logLength];
+			glGetShaderInfoLog(mHandle, logLength, &dummy, buffer);
+
+			std::string infoLog(buffer);
+			delete[] buffer;
+
+			return infoLog;
+		}
+		else
+		{
+			// No log
+			return std::string("");
+		}
+	}
 }
