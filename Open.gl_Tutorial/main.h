@@ -13,6 +13,7 @@
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtx/vec1.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 // Project wide defines
 #define GL_LOG_FILE "gl.log"
